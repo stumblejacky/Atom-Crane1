@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ATOM CRANE – Purple UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+  /* -------------------- ROOT TOKENS -------------------- */
+  :root{
+    --glass: rgba(255,255,255,.08);
+    --border: rgba(255,255,255,.15);
+    --accent:#ff00ff;
+    --secondary:#00f5ff;
+    --bg-gradient:linear-gradient(-45deg,#0b0b0b,#1a0033,#000428,#004e92);
+    --shadow:0 8px 32px rgba(0,0,0,.6);
+    --radius:16px;
+    --font:'Inter',sans-serif;
+  }
+
+  /* -------------------- RESET & BASE -------------------- */
+  *{margin:0;padding:0;box-sizing:border-box;font-family:var(--font)}
+  html{scroll-behavior:smooth}
+  body{
+    min-height:100vh;
+    background:var(--bg-gradient);
+    background-size:400% 400%;
+    animation:bgFlow 15s ease infinite;
+    color:#fff;
+    overflow-x:hidden;
+  }
+
+  @keyframes bgFlow{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+
+  /* -------------------- HEADER -------------------- */
+  header{
+    position:sticky;top:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.75rem 1.25rem;
+    background:var(--glass);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{font-size:1.5rem;font-weight:700;color:var(--accent);text-shadow:0 0 8px var(--accent)}
+  .cart-btn{
+    background:transparent;border:1px solid var(--accent);color:var(--accent);
+    padding:.4rem 1rem;border-radius:var(--radius);cursor:pointer;
+    transition:.3s;
+  }
+  .cart-btn:hover{background:var(--accent);color:#000;}
+
+  /* -------------------- HERO -------------------- */
+  .hero{
+    text-align:center;padding:4rem 1rem;
+  }
+  .hero h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:800;
+    background:linear-gradient(90deg,var(--accent),var(--secondary));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:glow 2s ease-in-out infinite alternate;
+  }
+  @keyframes glow{
+    from{text-shadow:0 0 5px var(--accent),0 0 10px var(--accent);}
+    to{text-shadow:0 0 10px var(--secondary),0 0 20px var(--secondary);}
+  }
+  .hero p{font-size:clamp(1rem,2.5vw,1.3rem);margin-top:.5rem;opacity:.85}
+
+  /* -------------------- PRODUCTS GRID -------------------- */
+  .products{
+    display:grid;gap:2rem;
+    padding:2rem 1rem;
+    max-width:1200px;margin:auto;
+  }
+  .panel-card{
+    position:relative;
+    background:var(--glass);backdrop-filter:blur(12px);
+    border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;
+    transition:transform .4s,box-shadow .4s;
+  }
+  .panel-card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 0 20px var(--accent);
+  }
+  .panel-card img{width:100%;height:220px;object-fit:cover}
+  .panel-info{padding:1.5rem;display:flex;flex-direction:column;gap:.6rem}
+  .panel-info h3{font-size:1.3rem;font-weight:600}
+  .panel-info .price{font-size:1.5rem;font-weight:700;color:var(--secondary)}
+  .panel-info ul{list-style:none;font-size:.9rem;opacity:.8}
+  .buy-btn{
+    margin-top:auto;
+    padding:.75rem 0;border:none;border-radius:var(--radius);
+    background:linear-gradient(90deg,var(--accent),var(--secondary));
+    color:#000;font-weight:700;cursor:pointer;
+    transition:.3s;
+  }
+  .buy-btn:hover{filter:brightness(1.2);transform:scale(1.05)}
+
+  /* -------------------- FOOTER -------------------- */
+  footer{
+    text-align:center;padding:2rem 1rem;font-size:.875rem;
+    background:var(--glass);backdrop-filter:blur(12px);
+    border-top:1px solid var(--border);
+  }
+
+  /* -------------------- RESPONSIVE -------------------- */
+  @media(min-width:600px){.products{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:900px){.products{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+
+<body>
+
+<!-- Live wallpaper canvas -->
+<canvas id="live-wallpaper"></canvas>
+
+<!-- Header -->
+<header>
+  <div class="logo">ATOM CRANE</div>
+  <button class="cart-btn" onclick="alert('Cart coming soon')">Cart (0)</button>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Atom Crane Panel Store</h1>
+  <p>Purchase Your favorite Panel And Dominate In Every Game.</p>
+</section>
+
+<!-- Products -->
+<section class="products">
+  <!-- 1 --><div class="panel-card"><img src="https://images3.alphacoders.com/132/thumb-350-1328396.webp" alt="Streamer panel"><div class="panel-info"><h3>Streamer Panel</h3><div class="price">$15/month</div><ul><li>✅ Aim neck</li><li>✅ Global server</li><li>✅ Drag Headshot</li><li>✅ Safe&secure</li></ul><button class="buy-btn" onclick="order('100 Diamonds','$0.99')">Buy Now</button></div></div>
+  <!-- 2 --><div class="panel-card"><img src="https://4kwallpapers.com/images/walls/thumbs_2t/21604.jpg" alt="Elite Pass"><div class="panel-info"><h3>Aim Silent</h3><div class="price">$8/month</div><ul><li>✅ Silent Aim</li><li>✅ Antiban</li><li>✅ Location</li><li>✅ Safe&Secure</li></ul><button class="buy-btn" onclick="order('Elite Pass','$4.99')">Buy Now</button></div></div>
+  <!-- 3 --><div class="panel-card"><img src="https://cdn.statusqueen.com/desktopwallpaper/thumbnail/anime-girl-Hd_4k_desktop_wallpaper_photos-505.png" alt="Bundle"><div class="panel-info"><h3>Aim kill</h3><div class="price">$10</div><ul><li>✅ Aimbot Body</li><li>✅ Aimkill v2</li><li>✅Esp Distance</li><li>✅ Medkit Run</li></ul><button class="buy-btn" onclick="order('Bundle','$9.99')">Buy Now</button></div></div>
+  <!-- 4 --><div class="panel-card"><img src="https://images5.alphacoders.com/741/thumb-1920-741057.jpg" alt="Membership"><div class="panel-info"><h3>Basic Panel</h3><div class="price">$2.49/month</div><ul><li>✅ Aimbot Drag</li><li>✅ Location</li></ul><button class="buy-btn" onclick="order('Membership','$2.49')">Buy Now</button></div></div>
+  <!-- 5 --><div class="panel-card"><img src="https://i.pinimg.com/736x/d1/01/17/d1011756dc56b4d7d235731a44216647.jpg" alt="Crates"><div class="panel-info"><h3>Emulator Bypass</h3><div class="price">$6.99/month</div><ul><li>✅ work with 32/64bit Emulator</li><li>✅ U Can Play With mobile Players</li></ul><button class="buy-btn" onclick="order('10x Crates','$6.99')">Buy Now</button></div></div>
+  <!-- 6 --><div class="panel-card"><img src="https://i.pinimg.com/736x/b6/e0/81/b6e08100b1a7da7d028d7c75272769da.jpg" alt="Rank Push"><div class="panel-info"><h3>Premium panel</h3><div class="price">$4/month</div><ul><li>✅ headshot lock/drag Aim/Speed Hack</li><li>✅ Chams/Wall/Relod/lite Pc</li></ul><button class="buy-btn" onclick="order('Rank Push','$12.99')">Buy Now</button></div></div>
+</section>
+
+<footer>© <span id="year"></span> FF Panel Store — Not affiliated with Garena.</footer>
+
+<!-- Live Wallpaper Script (purple particles) -->
+<script>
+(() => {
+  const cvs = document.getElementById('live-wallpaper');
+  const ctx = cvs.getContext('2d');
+  let w, h, particles = [];
+
+  const resize = () => {
+    w = cvs.width  = innerWidth;
+    h = cvs.height = innerHeight;
+    init();
+  };
+
+  const init = () => {
+    particles = [];
+    const count = Math.floor((w * h) / 15000);
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 1.5 + 0.5,
+        color: `hsl(${260 + Math.random() * 40}, 100%, 65%)`
+      });
+    }
+  };
+
+  const animate = () => {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = p.color;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+    requestAnimationFrame(animate);
+  };
+
+  addEventListener('resize', resize);
+  resize();
+  animate();
+})();
+
+document.getElementById('year').textContent = new Date().getFullYear();
+function order(product, price){
+  alert(`Redirecting to checkout for:\n${product} – ${price}`);
+}
+</script>
+<!-- ========== CONTACT FLOAT BUTTONS ========== -->
+<style>
+  .contact-float {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    z-index: 999;
+  }
+
+  .contact-float a {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.4rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .4);
+    transition: transform .2s;
+  }
+
+  .contact-float a:hover {
+    transform: scale(1.15);
+  }
+
+  /* small screens: move to bottom-center */
+  @media (max-width: 600px) {
+    .contact-float {
+      right: 50%;
+      transform: translateX(50%);
+      flex-direction: row;
+    }
+  }
+  /* Prevent any element from exceeding viewport */
+html,body{overflow-x:hidden}
+*{max-width:100%;box-sizing:border-box}
+#live-wallpaper{width:100vw !important;height:100vh !important}
+.products{max-width:100vw;padding-left:1rem;padding-right:1rem}
+</style>
+
+<div class="contact-float">
+  <!-- YouTube -->
+  <a href="https://youtube.com/@YOUR_CHANNEL"  target="_blank" title="YouTube">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.016 3.016 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+  </a>
+
+  <!-- Discord -->
+  <a href="https://discord.gg/YOUR_INVITE" target="_blank" title="Discord">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-2.003a.077.077 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.128 12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.704.78 1.37 1.225 2.002a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.662a.061.061 0 0 0-.032-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419s.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.955 2.418-2.157 2.418zm7.96 0c-1.183 0-2.157-1.085-2.157-2.419s.954-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+    </svg>
+  </a>
+
+  <!-- Telegram -->
+  <a href="https://t.me/YOUR_USERNAME" target="_blank" title="Telegram">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.87 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.743z"/>
+    </svg>
+  </a>
+</div>
+<!-- ========== END CONTACT FLOAT BUTTONS ========== -->
+ <script>
+  // Smooth scroll for any #hash links
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'});
+    });
+  });
+</script>
+</body>
+</html>
